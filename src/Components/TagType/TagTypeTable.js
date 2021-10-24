@@ -1,26 +1,25 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import TagTypeTableRow from './TagTypeTableRow';
 
 class TagTypeTable extends Component {
     state = {
-        types: [
-            {
-                id: 1,
-                type: 'genre'
-            },
-            {
-                id: 2,
-                type: 'tempo'
-            },
-            {
-                id: 3,
-                type: 'dance'
-            }
-        ]
+        types: []
     }
+
     componentDidMount() {
-        console.log(this.state.types)
+        this.handleGetTagTypes()
     }
+
+    handleGetTagTypes = () => {
+        axios.get('/tagType')
+            .then((response) => {
+                this.setState({
+                    ...this.state,
+                    types: response.data
+                })
+            })
+    };
 
     render() {
         const renderTagTypeTableRows = this.state.types.map((type) => {

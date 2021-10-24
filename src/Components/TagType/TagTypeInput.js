@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class TagTypeInput extends Component {
     state = {
@@ -9,13 +10,19 @@ class TagTypeInput extends Component {
         this.setState({
             ...this.state,
             [property]: event.target.value
-        });
+        })
     };
-
+    
     handleSubmit = event => {
         event.preventDefault();
-        alert(`submitting: ${this.state.type}`)
-    }
+        axios.post('/tagType', this.state)
+            .then((response) => {
+                this.setState({
+                    ...this.state,
+                    types: response.data
+                })
+            })
+    };
 
     handleKeyUp = key => {
         if (key.key === 'Enter') {

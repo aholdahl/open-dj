@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class TagTypeTableRow extends Component {
     state = {
@@ -19,24 +20,38 @@ class TagTypeTableRow extends Component {
         this.setState({
             ...this.state,
             editMode: !this.state.editMode
-        });
+        })
     };
 
     handleInput = (event, property) => {
         this.setState({
             ...this.state,
             [property]: event.target.value
-        });
+        })
     };
 
     handleSubmit = event => {
         event.preventDefault();
         alert(`submitting: ${this.state.type}`)
         this.toggleEditMode();
-    }
+        axios.put('/tagType', this.state)
+            .then((response) => {
+                this.setState({
+                    ...this.state,
+                    types: response.data
+                })
+            })
+    };
 
     handleDelete = () => {
         alert(`deleting: ${this.state.type}`)
+        axios.delete(`/tagType/${this.state.id}`)
+            .then((response) => {
+                this.setState({
+                    ...this.state,
+                    types: response.data
+                })
+            })
     };
 
     handleKeyUp = key => {
