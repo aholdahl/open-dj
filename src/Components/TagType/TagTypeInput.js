@@ -17,10 +17,11 @@ class TagTypeInput extends Component {
         event.preventDefault();
         axios.post('/tagType', this.state)
             .then((response) => {
-                this.setState({
-                    ...this.state,
-                    types: response.data
-                })
+                window.location.reload();
+                // this.setState({
+                //     ...this.state,
+                //     types: response.data
+                // })
             })
     };
 

@@ -36,10 +36,11 @@ class TagTypeTableRow extends Component {
         this.toggleEditMode();
         axios.put('/tagType', this.state)
             .then((response) => {
-                this.setState({
-                    ...this.state,
-                    types: response.data
-                })
+                window.location.reload();
+                // this.setState({
+                //     ...this.state,
+                //     types: response.data
+                // })
             })
     };
 
@@ -47,10 +48,11 @@ class TagTypeTableRow extends Component {
         alert(`deleting: ${this.state.type}`)
         axios.delete(`/tagType/${this.state.id}`)
             .then((response) => {
-                this.setState({
-                    ...this.state,
-                    types: response.data
-                })
+                window.location.reload();
+                // this.setState({
+                //     ...this.state,
+                //     types: response.data
+                // })
             })
     };
 
